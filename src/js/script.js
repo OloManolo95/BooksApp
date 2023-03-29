@@ -21,3 +21,35 @@ const render = function(){
 };
 
 render();
+
+//add empty array
+const favoriteBooks = [];
+
+//add references to books
+
+const allBooks = document.querySelectorAll('.book__image');
+
+
+
+const initActions = function(){
+  for(const book of allBooks){
+
+    //get id from data-id
+    const bookId = book.getAttribute('data-id');
+    console.log(bookId);
+
+    //add dbclick event listener
+    book.addEventListener('dblclick',function(event){
+      event.preventDefault();
+
+      book.classList.add('favorite');
+      favoriteBooks.push(bookId);
+      console.log('favorite books: ', favoriteBooks);
+    });
+  }
+};
+
+
+// run initActions
+
+initActions();
