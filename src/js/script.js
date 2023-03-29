@@ -42,8 +42,12 @@ const initActions = function(){
     book.addEventListener('dblclick',function(event){
       event.preventDefault();
 
-      book.classList.add('favorite');
-      favoriteBooks.push(bookId);
+      book.classList.toggle('favorite');
+      if(book.classList.contains('favorite')){
+        favoriteBooks.push(bookId);}
+      if(!book.classList.contains('favorite')){
+        favoriteBooks.pop(bookId);
+      }
       console.log('favorite books: ', favoriteBooks);
     });
   }
