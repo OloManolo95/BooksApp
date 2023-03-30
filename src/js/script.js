@@ -1,7 +1,7 @@
 // make refernce to template .books-list
 const template = Handlebars.compile(document.querySelector('#template-book').innerHTML);
 
-// make reference to .books-list
+// make reference to .books-list container
 
 const bookList = document.querySelector('.books-list');
 
@@ -24,35 +24,38 @@ render();
 
 //add empty array
 const favoriteBooks = [];
-
-//add references to books
-
-const allBooks = document.querySelectorAll('.book__image');
-
-
-
+//add function initActions
 const initActions = function(){
-  for(const book of allBooks){
 
-    //get id from data-id
-    const bookId = book.getAttribute('data-id');
-    console.log(bookId);
+  //add dbclick event listener to bookList
+  bookList.addEventListener('dblclick', function(event){
 
-    //add dbclick event listener
-    book.addEventListener('dblclick',function(event){
-      event.preventDefault();
+    //remove default browser behavior
+    event.preventDefault();
+    //add reference to clicked element parent
+    const clickedElement = event.target.offsetParent;
 
-      book.classList.toggle('favorite');
-      if(book.classList.contains('favorite')){
+    //check if clickedElement is a book element
+    if (clickedElement.classList.contains('book__image')) {
+      console.log('element clicked');
+      //get book data-id attribute value
+      const bookId = clickedElement.getAttribute('data-id');
+      console.log(bookId);
+      //add/remove 'favorite' class
+      clickedElement.classList.toggle('favorite');
+      //add book to a favoriteBooks array
+      if(clickedElement.classList.contains('favorite')){
         favoriteBooks.push(bookId);}
-      if(!book.classList.contains('favorite')){
+      //remove book from a favorite array
+      if(!clickedElement.classList.contains('favorite')){
         favoriteBooks.pop(bookId);
       }
       console.log('favorite books: ', favoriteBooks);
-    });
-  }
-};
 
+    }
+  });
+
+};
 
 // run initActions
 
