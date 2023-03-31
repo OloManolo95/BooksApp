@@ -1,9 +1,24 @@
 // make refernce to template .books-list
+
 const template = Handlebars.compile(document.querySelector('#template-book').innerHTML);
 
 // make reference to .books-list container
 
 const bookList = document.querySelector('.books-list');
+
+//add reference to form .filters
+
+const filtersContainer = document.querySelector('.filters');
+
+
+
+//add empty array
+const filters = [];
+
+//add empty array
+const favoriteBooks = [];
+
+
 
 // add function render
 
@@ -20,7 +35,6 @@ const render = function(){
   }
 };
 
-render();
 
 /*/add function filterBooks
 const filterBooks = function(){
@@ -38,14 +52,6 @@ const filterBooks = function(){
   }
 };
 /};*/
-//add empty array
-const filters = [];
-
-//add reference to form .filters
-const filtersContainer = document.querySelector('.filters');
-
-//add empty array
-const favoriteBooks = [];
 
 //add function initActions
 const initActions = function(){
@@ -117,6 +123,6 @@ const initActions = function(){
 
 };
 
-// run initActions
-
+// run functions
+render();
 initActions();
