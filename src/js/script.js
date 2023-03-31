@@ -22,8 +22,31 @@ const render = function(){
 
 render();
 
+//add function filterBooks
+const filterBooks = function(){
+//iterate thru books in dataSource.books
+  for(const book of dataSource.books){
+  //make var shouldBeHidden
+    let shouldBeHidden = false;
+    //iterate thru filters array
+    for(const filter of filters){
+    //check if filter matches book
+      if(!book.details[filter]){
+        shouldBeHidden = true;
+      }
+    }
+  }
+};
+//};
+//add empty array
+const filters = [];
+
+//add reference to form .filters
+const filtersContainer = document.querySelector('.filters');
+
 //add empty array
 const favoriteBooks = [];
+
 //add function initActions
 const initActions = function(){
 
@@ -45,14 +68,49 @@ const initActions = function(){
       clickedElement.classList.toggle('favorite');
       //add book to a favoriteBooks array
       if(clickedElement.classList.contains('favorite')){
-        favoriteBooks.push(bookId);}
-      //remove book from a favorite array
-      if(!clickedElement.classList.contains('favorite')){
+        favoriteBooks.push(bookId);
+      } else {
+        //remove book from a favorite array
         favoriteBooks.pop(bookId);
       }
+
       console.log('favorite books: ', favoriteBooks);
 
     }
+  });
+
+
+  //add new event listener on form
+
+  filtersContainer.addEventListener('click', function(event){
+
+    //add refernce to clicked element
+    const clickedElement = event.target;
+
+    //add reference to clicked element tagName, type, name
+    const tagName = clickedElement.tagName;
+    const type = clickedElement.getAttribute('type');
+    const name = clickedElement.getAttribute('name');
+
+    //check if element is a checkbox
+    if(tagName == 'INPUT' && type == 'checkbox' && name == 'filter') {
+      console.log(clickedElement.value);
+
+      //check if input is checked
+      if(clickedElement.checked){
+
+        //if checked, add to an array
+        filters.push(clickedElement.value);
+
+      } else {
+        //if not, remove it from an array
+        filters.pop(clickedElement.value);
+
+      }
+      console.log(filters);
+    }
+
+
   });
 
 };
