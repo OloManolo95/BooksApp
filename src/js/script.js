@@ -22,7 +22,7 @@ const render = function(){
 
 render();
 
-//add function filterBooks
+/*/add function filterBooks
 const filterBooks = function(){
 //iterate thru books in dataSource.books
   for(const book of dataSource.books){
@@ -37,7 +37,7 @@ const filterBooks = function(){
     }
   }
 };
-//};
+/};*/
 //add empty array
 const filters = [];
 
@@ -71,7 +71,8 @@ const initActions = function(){
         favoriteBooks.push(bookId);
       } else {
         //remove book from a favorite array
-        favoriteBooks.pop(bookId);
+        const indexOfBook = favoriteBooks.indexOf(bookId);
+        favoriteBooks.splice(indexOfBook, 1);
       }
 
       console.log('favorite books: ', favoriteBooks);
@@ -104,7 +105,8 @@ const initActions = function(){
 
       } else {
         //if not, remove it from an array
-        filters.pop(clickedElement.value);
+        const indexOfFilter = filters.indexOf(clickedElement.value);
+        filters.splice(indexOfFilter, 1);
 
       }
       console.log(filters);
