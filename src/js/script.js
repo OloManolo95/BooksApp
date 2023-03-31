@@ -36,7 +36,7 @@ const render = function(){
 };
 
 
-/*/add function filterBooks
+//add function filterBooks
 const filterBooks = function(){
 //iterate thru books in dataSource.books
   for(const book of dataSource.books){
@@ -44,14 +44,39 @@ const filterBooks = function(){
     let shouldBeHidden = false;
     //iterate thru filters array
     for(const filter of filters){
-    //check if filter matches book
+    //check if filter matches book details property
       if(!book.details[filter]){
         shouldBeHidden = true;
+        //
+        break;
+      }
+    }
+
+    //add refernece to all books
+    const bookImages = bookList.querySelectorAll('.book__image');
+    //check if shouldBeHidden is true
+    if(shouldBeHidden) {
+      //iterate thru book images
+      for(const image of bookImages){
+        //find apropriate book image
+        if (book.id == image.getAttribute('data-id')){
+          //add 'hidden' class
+          image.classList.add('hidden');
+        }
+      }
+    } else {
+      //iterate thru book images
+      for(const image of bookImages){
+      //find apropriate book image
+        if (book.id == image.getAttribute('data-id')){
+        //add 'hidden' class
+          image.classList.remove('hidden');
+        }
       }
     }
   }
 };
-/};*/
+
 
 //add function initActions
 const initActions = function(){
@@ -109,11 +134,14 @@ const initActions = function(){
         //if checked, add to an array
         filters.push(clickedElement.value);
 
+        filterBooks();
+
       } else {
         //if not, remove it from an array
         const indexOfFilter = filters.indexOf(clickedElement.value);
         filters.splice(indexOfFilter, 1);
 
+        filterBooks();
       }
       console.log(filters);
     }
