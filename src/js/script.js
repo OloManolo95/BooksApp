@@ -25,6 +25,14 @@ const favoriteBooks = [];
 const render = function(){
 //make a loop
   for(const book of dataSource.books){
+
+    //add const ratingBgc
+    const ratingBgc = determineRatingBgc(book.rating);
+    //add const ratingWidth which converts rating to percantage
+    const ratingWidth = book.rating * 10;
+
+    book.ratingBgc = ratingBgc;
+    book.ratingWidth = ratingWidth;
     //generate a HTML code based on template and data of a book
     const generatedHTML = template(book);
     //create a DOM based on HTML
@@ -75,6 +83,28 @@ const filterBooks = function(){
       }
     }
   }
+};
+
+//add function determineRatingBgc
+
+const determineRatingBgc = function(rating){
+
+  let background;
+
+  if(rating < 6){
+    background = 'linear-gradient(to bottom,  #fefcea 0%, #f1da36 100%)';
+  }
+  if(rating > 6 && rating <= 8){
+    background = 'linear-gradient(to bottom, #b4df5b 0%,#b4df5b 100%)';
+  }
+  if(rating > 8 && rating <=9){
+    background = 'linear-gradient(to bottom, #299a0b 0%, #299a0b 100%)';
+  }
+  if(rating > 9){
+    background = 'linear-gradient(to bottom, #ff0084 0%,#ff0084 100%)';
+  }
+
+  return background;
 };
 
 
